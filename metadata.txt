@@ -1,0 +1,15 @@
+[general]
+name:ElasticSearchConnector
+description:Connector to a Elasticsearch datastore
+
+version:0.1
+qgisMinimumVersion:3.17
+experimental:True
+category:Vector
+homepage:https://github.com/spatialys/QGISElasticSearchConnector
+repository:https://github.com/spatialys/QGISElasticSearchConnector
+tracker:https://github.com/spatialys/QGISElasticSearchConnector/issues
+about:Connect to a ElasticSearch datastore
+icon:icons/elasticsearchconnector_icon.png
+email:even.rouault@spatialys.com
+author:Even Rouault
