@@ -90,22 +90,24 @@ class ConnectionItem(QgsDataCollectionItem):
         for sublayer in sublayers:
             layer_idx, name, count, geom_type, geom_col_name, details = sublayer.split(
                 QgsDataProvider.sublayerSeparator())
-            if geom_type == 'Point':
-                layerType = QgsLayerItem.Point
-            elif geom_type == 'LineString':
-                layerType = QgsLayerItem.Line
-            elif geom_type == 'Polygon':
-                layerType = QgsLayerItem.Polygon
-            else:
-                layerType = QgsLayerItem.Table
-            uri = self.uri + '|layername=' + name
-            if countOccurencesOfName[name] > 1:
-                uri += '|geometrytype=' + geom_type
-                name += ' (' + geom_type + ')'
-            child = LayerItem(None, name, self.path() +
-                              '/' + name, uri, layerType, "ogr")
-            child.setState(QgsDataItem.Populated)
-            children.append(child)
+            
+            if not name.startswith('.'):
+                if geom_type == 'Point':
+                    layerType = QgsLayerItem.Point
+                elif geom_type == 'LineString':
+                    layerType = QgsLayerItem.Line
+                elif geom_type == 'Polygon':
+                    layerType = QgsLayerItem.Polygon
+                else:
+                    layerType = QgsLayerItem.Table
+                uri = self.uri + '|layername=' + name
+                if countOccurencesOfName[name] > 1:
+                    uri += '|geometrytype=' + geom_type
+                    name += ' (' + geom_type + ')'
+                child = LayerItem(None, name, self.path() +
+                                  '/' + name, uri, layerType, "ogr")
+                child.setState(QgsDataItem.Populated)
+                children.append(child)
 
         return children
 

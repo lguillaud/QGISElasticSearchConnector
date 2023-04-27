@@ -216,17 +216,18 @@ class ConnectionsDialog(QgsAbstractDataSourceWidget):
             layer_idx, name, count, geom_type, geom_col_name, details = sublayer.split(
                 QgsDataProvider.sublayerSeparator())
 
-            if geom_type == 'Point':
-                icon = QgsLayerItem.iconPoint()
-            elif geom_type == 'LineString':
-                icon = QgsLayerItem.iconLine()
-            elif geom_type == 'Polygon':
-                icon = QgsLayerItem.iconPolygon()
-            else:
-                icon = QgsLayerItem.iconTable()
-            geomItem = QStandardItem(icon, geom_type)
-            nameItem = QStandardItem(name)
-            self.mModel.appendRow([nameItem, geomItem, QStandardItem("")])
+            if not name.startswith('.'):
+                if geom_type == 'Point':
+                    icon = QgsLayerItem.iconPoint()
+                elif geom_type == 'LineString':
+                    icon = QgsLayerItem.iconLine()
+                elif geom_type == 'Polygon':
+                    icon = QgsLayerItem.iconPolygon()
+                else:
+                    icon = QgsLayerItem.iconTable()
+                geomItem = QStandardItem(icon, geom_type)
+                nameItem = QStandardItem(name)
+                self.mModel.appendRow([nameItem, geomItem, QStandardItem("")])
 
         self.resizeTreeview()
 
